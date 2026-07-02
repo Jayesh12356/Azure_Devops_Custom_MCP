@@ -1,0 +1,15 @@
+[Unit]
+Description=Azure DevOps MCP (streamable-http for Cursor)
+After=network-online.target
+WantedBy=default.target
+
+[Service]
+Type=simple
+WorkingDirectory=%h/azure-devops-mcp
+ExecStart=%h/azure-devops-mcp/scripts/start-streamable.sh
+Restart=on-failure
+RestartSec=5
+Environment=HOME=%h
+
+[Install]
+WantedBy=default.target
