@@ -1,0 +1,31 @@
+{
+  "mcpServers": {
+    "azure-devops-stdio": {
+      "command": "/path/to/node",
+      "args": [
+        "/path/to/azure-devops-mcp/dist/index.js",
+        "https://dev.azure.com/your-org",
+        "--transport",
+        "stdio",
+        "--authentication",
+        "envvar",
+        "-d",
+        "core",
+        "repositories",
+        "pipelines",
+        "work-items"
+      ],
+      "env": {
+        "ADO_MCP_AUTH_TOKEN": "YOUR_PERSONAL_PAT",
+        "NODE_TLS_REJECT_UNAUTHORIZED": "0"
+      }
+    },
+    "azure-devops-streamable": {
+      "url": "https://azure-devops-mcp.yourcompany.com/mcp",
+      "transport": "streamable-http",
+      "headers": {
+        "X-ADO-PAT": "YOUR_PERSONAL_PAT"
+      }
+    }
+  }
+}

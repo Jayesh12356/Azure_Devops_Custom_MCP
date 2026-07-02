@@ -1,0 +1,56 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: azure-devops-mcp
+  namespace: azure-devops-mcp
+  labels:
+    app: azure-devops-mcp
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      app: azure-devops-mcp
+  template:
+    metadata:
+      labels:
+        app: azure-devops-mcp
+    spec:
+      containers:
+        - name: azure-devops-mcp
+          image: YOUR_ACR_NAME.azurecr.io/azure-devops-mcp:latest
+          imagePullPolicy: Always
+          ports:
+            - name: http
+              containerPort: 3000
+              protocol: TCP
+          envFrom:
+            - configMapRef:
+                name: azure-devops-mcp-config
+            - secretRef:
+                name: azure-devops-mcp-secrets
+          readinessProbe:
+            httpGet:
+              path: /ready
+              port: http
+            initialDelaySeconds: 10
+            periodSeconds: 10
+          livenessProbe:
+            httpGet:
+              path: /health
+              port: http
+            initialDelaySeconds: 20
+            periodSeconds: 20
+          resources:
+            requests:
+              cpu: 100m
+              memory: 256Mi
+            limits:
+              cpu: 500m
+              memory: 512Mi
+          securityContext:
+            allowPrivilegeEscalation: false
+            readOnlyRootFilesystem: true
+            runAsNonRoot: true
+            runAsUser: 1000
+            capabilities:
+              drop: ["ALL"]

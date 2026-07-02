@@ -1,0 +1,18 @@
+apiVersion: v1
+kind: ConfigMap
+metadata:
+  name: azure-devops-mcp-config
+  namespace: azure-devops-mcp
+data:
+  MCP_TRANSPORT: "all"
+  MCP_HOST: "0.0.0.0"
+  MCP_PORT: "3000"
+  LOG_LEVEL: "info"
+  MCP_AUTHENTICATION: "request-pat"
+  MCP_REQUIRE_USER_PAT: "true"
+  # Comma-separated hostnames allowed by MCP DNS rebinding protection (set your ingress host).
+  MCP_ALLOWED_HOSTS: "azure-devops-mcp.example.com"
+  # Azure DevOps organization name or on-prem collection URL.
+  ADO_ORG: "https://dev.azure.com/your-org"
+  # On-prem servers with self-signed TLS may need this on the pod:
+  NODE_TLS_REJECT_UNAUTHORIZED: "0"

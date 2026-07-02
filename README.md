@@ -1,3 +1,7 @@
+# Azure DevOps MCP Server (Custom Fork)
+
+> Custom extensions: streamable-http transport, per-user PAT (`request-pat`), Kubernetes deployment, and Frappe ecosystem integration. Based on [microsoft/azure-devops-mcp](https://github.com/microsoft/azure-devops-mcp).
+
 # ⭐ Azure DevOps MCP Server
 
 > [!IMPORTANT]

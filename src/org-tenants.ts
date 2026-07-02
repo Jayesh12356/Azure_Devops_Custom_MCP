@@ -60,6 +60,11 @@ function isCacheEntryExpired(entry: OrgTenantCacheEntry): boolean {
 }
 
 export async function getOrgTenant(orgName: string): Promise<string | undefined> {
+  if (orgName.startsWith("http://") || orgName.startsWith("https://")) {
+    logger.debug(`Skipping tenant lookup for on-premise organization URL: ${orgName}`);
+    return undefined;
+  }
+
   // Load cache
   const cache = await loadCache();
 
